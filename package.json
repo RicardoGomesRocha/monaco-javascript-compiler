@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "build-test": "echo \"Error: no test specified\" && exit 1",
-        "debug": "npx webpack --config webpack.config.js --mode=development",
-        "build": "npx webpack --config webpack.config.js --mode=production"
+        "debug": "npx webpack --config webpack.config.js --mode=development --watch=true",
+        "build": "npx webpack --config webpack.config.js --mode=production "
     },
     "repository": {
         "type": "git",
