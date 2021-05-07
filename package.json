@@ -1,0 +1,27 @@
+{
+    "name": "monaco-javascript-compiler",
+    "version": "1.0.0-alpha",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/RicardoGomesRocha/monaco-javascript-compiler.git"
+    },
+    "author": "Ricardo Rocha",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/RicardoGomesRocha/monaco-javascript-compiler/issues"
+    },
+    "homepage": "https://github.com/RicardoGomesRocha/monaco-javascript-compiler#readme",
+    "dependencies": {
+        "httpserver": "^0.3.0",
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "webpack": "^5.36.2",
+        "webpack-cli": "^4.7.0"
+    }
+}
