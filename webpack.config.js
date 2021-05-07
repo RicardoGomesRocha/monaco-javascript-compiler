@@ -1,5 +1,6 @@
 const path = require('path');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: './index.ts',
@@ -32,6 +33,12 @@ module.exports = {
     plugins: [
         new MonacoWebpackPlugin({
             languages: ['typescript', 'javascript', 'css']
+        }),
+        new CopyPlugin({
+            patterns: [{
+                from: "package.json",
+                to: ""
+            }],
         })
     ],
     watch: true
