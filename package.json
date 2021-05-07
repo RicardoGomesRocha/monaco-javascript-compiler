@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build-test": "echo \"Error: no test specified\" && exit 1",
+        "build-test": "echo \"Error: no test specified\"",
         "debug": "npx webpack --config webpack.config.js --mode=development --watch=true",
         "build": "npx webpack --config webpack.config.js --mode=production "
     },
