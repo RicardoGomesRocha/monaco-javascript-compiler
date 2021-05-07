@@ -1,16 +1,8 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-/** Global Importations */
-import {
-    ConfusionMatrix,
-    AverageMethod
-} from '@fullexpression/confusion-matrix-stats';
 
 class CodeEditor extends HTMLElement {
-    constructor() {
-        super();
-        this.id = 'codeEditor';
-        this.css = `
-            .code-editor-wrapper {
+
+    private css = `.code-editor-wrapper {
                 position: relative;
                 width: 600px;
                 height: 400px;
@@ -48,7 +40,7 @@ class CodeEditor extends HTMLElement {
                 cursor: pointer;
             }
         `;
-        this.html = `
+    private html = `
             <div class="editor">
                 <div class="code-editor-wrapper" id="code-editor-wrapper"></div>
                 <div class="console-wrapper">
@@ -60,9 +52,12 @@ class CodeEditor extends HTMLElement {
                 </div>
                 
             </div>
-        `;
-        this.executeTimes = 0
-    }
+        `
+    private editor: any;
+
+    private wrapper: any;
+
+    constructor() { super(); }
 
     connectedCallback() {
         const root = this.getRootElement();
@@ -72,9 +67,6 @@ class CodeEditor extends HTMLElement {
             language: 'javascript',
             theme: 'vs-dark'
         });
-
-        monaco.languages.typescript.javascriptDefaults.addExtraLib(ConfusionMatrix.toString());
-        monaco.languages.typescript.javascriptDefaults.addExtraLib(JSON.stringify(AverageMethod));
 
         const executeButton = root.getElementsByClassName('execute')[0];
         executeButton.onclick = () => this.execute();
@@ -122,46 +114,46 @@ console.log(\`The f1Score for 'Sadness' is: \${f1score}\`);
     }
 
     execute() {
-        const oldConsole = console;
-        const consoleElement = this.getConsole();
-        console.log = (message, error) => {
-            let html = `<span class="${error ? 'error' : ''}">`
-            if (typeof message == 'object') {
-                html += (JSON && JSON.stringify ? JSON.stringify(message) : message);
-            } else {
-                html += message;
-            }
-            consoleElement.innerHTML += `${html}</span>`
-        };
-        console.error = (message) => console.log(message, true);
+        // const oldConsole = console;
+        // const consoleElement = this.getConsole();
+        // console.log = (message, error) => {
+        //     let html = `<span class="${error ? 'error' : ''}">`
+        //     if (typeof message == 'object') {
+        //         html += (JSON && JSON.stringify ? JSON.stringify(message) : message);
+        //     } else {
+        //         html += message;
+        //     }
+        //     consoleElement.innerHTML += `${html}</span>`
+        // };
+        // console.error = (message) => console.log(message, true);
 
-        const code = this.editor.getValue();
-        try {
-            window.ConfusionMatrix = ConfusionMatrix;
-            window.AverageMethod = AverageMethod;
-            const br = this.executeTimes > 0 ? '</br>' : '';
-            ++this.executeTimes;
-            consoleElement.innerHTML += `${br}<span>Execution ${this.executeTimes}:</span>`
-            eval(code);
-        } catch (ex) {
-            console.error(ex.toString());
-        }
-        window.ConfusionMatrix = undefined;
-        window.AverageMethod = undefined;
-        console = oldConsole;
+        // const code = this.editor.getValue();
+        // try {
+        //     window.ConfusionMatrix = ConfusionMatrix;
+        //     window.AverageMethod = AverageMethod;
+        //     const br = this.executeTimes > 0 ? '</br>' : '';
+        //     ++this.executeTimes;
+        //     consoleElement.innerHTML += `${br}<span>Execution ${this.executeTimes}:</span>`
+        //     eval(code);
+        // } catch (ex) {
+        //     console.error(ex.toString());
+        // }
+        // window.ConfusionMatrix = undefined;
+        // window.AverageMethod = undefined;
+        // console = oldConsole;
     }
 
     getConsole() {
-        if (!this.consoleElement) {
-            const root = this.getRootElement();
-            this.consoleElement = root.getElementsByClassName('console')[0];
-        }
-        return this.consoleElement;
+        // if (!this.consoleElement) {
+        //     const root = this.getRootElement();
+        //     this.consoleElement = root.getElementsByClassName('console')[0];
+        // }
+        // return this.consoleElement;
     }
 
     cleanConsole() {
-        const consoleElement = this.getConsole();
-        consoleElement.innerHTML = '';
+        // const consoleElement = this.getConsole();
+        // consoleElement.innerHTML = '';
     }
 }
 
